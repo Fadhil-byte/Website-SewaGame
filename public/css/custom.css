@@ -1,0 +1,142 @@
+/* Page Background */
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* Custom Color Palette */
+:root {
+    --sg-primary: #4f46e5;
+    --sg-primary-dark: #4338ca;
+    --sg-primary-light: #818cf8;
+    --sg-secondary: #06b6d4;
+    --sg-success: #10b981;
+    --sg-success-dark: #059669;
+    --sg-warning: #f59e0b;
+    --sg-warning-dark: #d97706;
+    --sg-danger: #ef4444;
+    --sg-danger-dark: #dc2626;
+    --sg-info: #3b82f6;
+    --sg-purple: #8b5cf6;
+    --sg-pink: #ec4899;
+}
+
+/* Navbar Gradient */
+.navbar {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+}
+
+.navbar-brand {
+    background: linear-gradient(90deg, var(--sg-primary), var(--sg-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--sg-primary) 0%, var(--sg-secondary) 100%) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+}
+
+/* Feature Cards */
+.feature-card {
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04) !important;
+}
+
+.feature-card i {
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover i {
+    transform: scale(1.2);
+}
+
+/* Product Cards */
+.product-card {
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(79,70,229,0.25) !important;
+}
+
+/* Stats Cards - Variasi warna */
+.stats-users {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+}
+
+.stats-products {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+}
+
+.stats-active {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+.stats-revenue {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+}
+
+/* Step Circles */
+.step-circle {
+    background: linear-gradient(135deg, var(--sg-primary), var(--sg-secondary));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s ease;
+}
+
+.step-circle:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Table Headers */
+.table-dark {
+    background: linear-gradient(90deg, #1e293b 0%, #334155 100%) !important;
+}
+
+.card-header.bg-white {
+    background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%) !important;
+    border-bottom: 2px solid var(--sg-primary-light);
+}
+
+/* Button Gradients */
+.btn-primary {
+    background: linear-gradient(90deg, var(--sg-primary), var(--sg-primary-dark));
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(90deg, var(--sg-success), var(--sg-success-dark));
+    border: none;
+}
+
+/* Badge Role */
+.badge-role-admin {
+    background: linear-gradient(90deg, #f59e0b, #d97706) !important;
+}
+
+.badge-role-user {
+    background: linear-gradient(90deg, var(--sg-info), #2563eb) !important;
+}
