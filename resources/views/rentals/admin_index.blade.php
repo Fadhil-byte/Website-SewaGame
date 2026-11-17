@@ -1,75 +1,111 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Peminjaman')
+@section('title', 'Data Peminjaman - Admin')
 
 @section('content')
-<div class="container py-4">
-    <h2 class="mb-4"><i class="bi bi-calendar-check"></i> Daftar Peminjaman</h2>
+<div class="container py-4 py-lg-5">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb-custom">
+        <li><a href="{{ route('home') }}">Dashboard</a></li>
+        <li class="active">Data Peminjaman</li>
+    </ul>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    <!-- Header Actions -->
+    <div class="card card-clean p-4 mb-4">
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+            <div>
+                <h3 class="fw-bold mb-1">Manajemen Peminjaman</h3>
+                <p class="text-muted small mb-0">Pantau dan kelola seluruh transaksi penyewaan game, masa aktif, dan aktivasi link unduhan.</p>
+            </div>
+            <a href="{{ route('home') }}" class="btn btn-light-custom btn-sm align-self-start align-self-sm-auto">
+                <i class="bi bi-speedometer2 me-1"></i> Dashboard
+            </a>
+        </div>
+    </div>
 
+    <!-- Rentals Table -->
     @if($rentals->count() > 0)
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Peminjam</th>
-                        <th>Produk</th>
-                        <th>Mulai</th>
-                        <th>Selesai</th>
-                        <th>Status</th>
-                        <th>Pembayaran</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($rentals as $rental)
-                        <tr class="{{ $rental->is_expired ? 'table-secondary' : '' }}">
-                            <td>#{{ $rental->id }}</td>
-                            <td>
-                                <strong>{{ $rental->user->name }}</strong>
-                                <br><small class="text-muted">{{ $rental->user->email }}</small>
-                            </td>
-                            <td>{{ $rental->product->name }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rental->start_date)->format('d/m/Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rental->end_date)->format('d/m/Y') }}</td>
-                            <td>
-                                @if($rental->status === 'active')
-                                    <span class="badge bg-success">Aktif</span>
-                                @elseif($rental->status === 'expired')
-                                    <span class="badge bg-danger">Expired</span>
-                                @else
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($rental->payment_status === 'paid')
-                                    <span class="badge bg-success">Lunas</span>
-                                @else
-                                    <span class="badge bg-secondary">Dikembalikan</span>
-                                @endif
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ route('admin.rentals.show', $rental) }}" class="btn btn-sm btn-outline-primary">
-                                    Detail
-                                </a>
-                            </td>
+        <div class="table-clean-wrapper mb-4">
+            <div class="table-responsive">
+                <table class="table table-clean">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pelanggan</th>
+                            <th>Produk</th>
+                            <th>Masa Sewa</th>
+                            <th>Status</th>
+                            <th>Pembayaran</th>
+                            <th class="text-end">Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($rentals as $rental)
+                            <tr class="{{ $rental->is_expired ? 'opacity-75' : '' }}">
+                                <td>
+                                    <span class="fw-bold text-muted small">#{{ $rental->id }}</span>
+                                </td>
+                                <td>
+                                    <strong class="text-dark d-block">{{ $rental->user->name }}</strong>
+                                    <small class="text-muted">{{ $rental->user->email }}</small>
+                                </td>
+                                <td>
+                                    <strong class="text-dark">{{ $rental->product->name }}</strong>
+                                    <small class="text-muted d-block">Rp {{ number_format($rental->product->rental_price, 0, ',', '.') }}</small>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <div class="text-dark fw-semibold">{{ \Carbon\Carbon::parse($rental->start_date)->translatedFormat('d M Y') }}</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">s/d {{ \Carbon\Carbon::parse($rental->end_date)->translatedFormat('d M Y') }}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if($rental->status === 'active')
+                                        <span class="badge-subtle badge-subtle-success">Aktif</span>
+                                    @elseif($rental->status === 'expired')
+                                        <span class="badge-subtle badge-subtle-danger">Expired</span>
+                                    @else
+                                        <span class="badge-subtle badge-subtle-warning">Pending</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($rental->payment_status === 'paid')
+                                        <span class="badge-subtle badge-subtle-success">Lunas</span>
+                                    @else
+                                        <span class="badge-subtle badge-subtle-dark">Pending</span>
+                                    @endif
+                                </td>
+                                <td class="text-end">
+                                    <div class="d-inline-flex gap-1">
+                                        <a href="{{ route('admin.rentals.show', $rental) }}" class="btn btn-sm btn-light-custom px-2" title="Detail Peminjaman">
+                                            <i class="bi bi-eye"></i> Detail
+                                        </a>
+                                        @if($rental->status === 'pending')
+                                            <a href="{{ route('admin.rentals.sendLinksForm', $rental) }}" class="btn btn-sm btn-primary px-2" title="Kirim Link">
+                                                <i class="bi bi-send"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="mt-4">
-            {{ $rentals->links() }}
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center">
+            {{ $rentals->links('pagination::bootstrap-5') }}
         </div>
     @else
-        <div class="text-center py-5">
-            <i class="bi bi-calendar-x fs-1 text-muted"></i>
-            <h4 class="text-muted mt-3">Belum ada peminjaman</h4>
+        <!-- Empty State -->
+        <div class="empty-state-box">
+            <div class="empty-state-icon">
+                <i class="bi bi-calendar-x"></i>
+            </div>
+            <h4 class="fw-bold mb-2">Belum Ada Transaksi Sewa</h4>
+            <p class="text-muted small mb-0">Saat ini belum ada peminjaman yang tercatat di dalam sistem.</p>
         </div>
     @endif
 </div>

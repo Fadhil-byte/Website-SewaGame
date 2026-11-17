@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    if (!Auth::check()) {
-        return redirect()->route('login');
-    }
-
-    if (Auth::user()->role === 'admin') {
+    if (Auth::check() && Auth::user()->role === 'admin') {
         return app(AdminController::class)->dashboard();
     }
 

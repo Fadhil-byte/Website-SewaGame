@@ -12,8 +12,14 @@ class ProductController extends Controller
         $query = Product::query();
 
         if ($search = $request->input('search')) {
-            $query->where('name', 'like', "%{$search}%")
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
                   ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        if ($category = $request->input('category')) {
+            $query->where('label', $category);
         }
 
         $products = $query->latest()->paginate(12);

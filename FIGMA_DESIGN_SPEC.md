@@ -1,48 +1,55 @@
-# Figma Design Spec - SewaGame
+# Figma Design Spec - SewaGame Modern Design System
 
-## Color Palette
-- Primary: #0d6efd (blue) - btn-primary, navbar brand
-- Success: #198754 (green) - btn-success, card success
-- Warning: #ffc107 (yellow) - btn-warning, badge
-- Info: #0dcaf0 (light blue) - btn-info, card info
-- Dark: #212529 - navbar, footer
-
-## Typography
-- Headings: h1 display-4 (hero), h2 (page title), h5 (card title)
-- Body: 14px default Bootstrap
+## 1. Design Principles & Foundations
+- **Style Concept**: Clean, Modern, SaaS-like, Consistent, & Fully Responsive (Mobile & Desktop).
+- **Typography**: `Plus Jakarta Sans` (Google Fonts: 400, 500, 600, 700, 800) with fallbacks.
+- **Base Grid**: 12-column responsive grid with fluid breakpoints (`col-12`, `col-sm-6`, `col-lg-4`, `col-xl-3`).
 
 ---
 
-## Pages
+## 2. Color Palette & Design Tokens
+- **Brand Primary**: `#4F46E5` (Indigo 600) - Main actions, brand highlights, active states
+- **Primary Hover**: `#4338CA` (Indigo 700)
+- **Primary Subtle / Light**: `#EEF2FF` (Indigo 50) - Active backgrounds, soft pills
+- **Secondary / Accent**: `#06B6D4` (Cyan 500)
+- **Dark Surface / Navbar**: `#0F172A` (Slate 900) with glassmorphism blur
+- **Body Background**: `#F8FAFC` (Slate 50)
+- **Card Surface**: `#FFFFFF` with 1px border (`#E2E8F0`)
+- **Text Primary**: `#1E293B` (Slate 800)
+- **Text Muted**: `#64748B` (Slate 500)
 
-### 1. Home - Pembeli (home.blade.php)
-Hero section, feature cards (3), how-it-works steps (4)
-
-### 2. Home - Admin (admin/dashboard.blade.php)
-Statistik cards (4):
-- Total Pengguna - bg-primary (bi-people)
-- Total Produk - bg-success (bi-boxes)
-- Peminjaman Aktif - bg-warning (bi-calendar-check)
-- Total Keuntungan - bg-info (bi-currency-dollar)
-Recent Rentals table + Recent Users list
-
-### 3. Manajemen Produk (products/admin_index.blade.php)
-- Header: h2 + btn-success Tambah Produk
-- Search form: input small + btn-secondary search + clear btn
-- Table: ID, Nama, Harga, GitHub, Itch.io, Aksi
-- GitHub/Itch.io: btn-dark/btn-outline-secondary or "-"
-- Edit/Delete buttons
-
-### 4-13. Other pages (same as before)
+### Status Colors (Subtle Pills):
+- **Success (Aktif / Lunas)**: Bg `#ECFDF5`, Border `#A7F3D0`, Text `#047857`
+- **Warning (Pending)**: Bg `#FFFBEB`, Border `#FDE68A`, Text `#B45309`
+- **Danger (Expired / Ditolak)**: Bg `#FFF1F2`, Border `#FECDD3`, Text `#BE123C`
+- **Info**: Bg `#F0F9FF`, Border `#BFDBFE`, Text `#0369A1`
 
 ---
 
-## Icons (Bootstrap Icons)
-bi-controller, bi-boxes, bi-calendar-check, bi-people, bi-currency-dollar, bi-speedometer2, bi-search, bi-x, bi-plus-circle, bi-pencil-square, bi-trash, bi-github, bi-link-45deg
+## 3. Component Architecture
+- **Cards**:
+  - Border radius: `16px` (`var(--sg-radius-lg)`)
+  - Border: `1px solid var(--sg-border)`
+  - Shadow: Soft ambient `var(--sg-shadow-sm)`, elevated to `var(--sg-shadow-lg)` on hover
+- **Buttons**:
+  - Height: ~40px - 44px
+  - Border radius: `12px` (`var(--sg-radius-md)`)
+  - Typography: 600 SemiBold with icon alignment
+- **Product Card**:
+  - Image ratio 16:10 with overflow hidden and smooth zoom on hover
+  - Category pill badge floating top-left
+  - Direct price display (`Rp 25.000 / 7 hari`)
+  - Quick action buttons: "Detail" & "+ Sewa"
+- **Clean Table**:
+  - Thead: uppercase, `fs-7`, muted text, light slate background (`#F8FAFC`)
+  - Tbody: spacious row padding (`1rem 1.25rem`), soft border separators
+  - Mobile: wrapped in smooth horizontal scrollable container
+- **Admin Stat Card**:
+  - Clean white card, pastel icon box, large number typography, clear metric label
 
 ---
 
-## Admin Dashboard Flow
-1. Login -> Dashboard admin statistik
-2. Kelola Produk (with search)
-3. Kelola Peminjaman
+## 4. Responsive Breakpoints
+- **Mobile (< 576px)**: Stacked single column, full width touch targets, hidden dense table headers, padded sticky navigation.
+- **Tablet (576px - 991px)**: 2-column product grid, 2-column admin metrics, compact order summary.
+- **Laptop & Desktop (>= 992px)**: 3 to 4 column product grid, 4-column admin metrics, split-screen checkout & product details.

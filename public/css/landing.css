@@ -1,0 +1,133 @@
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+:root {
+    --sg-primary: #0d6efd;
+    --sg-primary-dark: #0b5ed7;
+    --sg-success: #198754;
+    --sg-warning: #ffc107;
+    --sg-info: #0dcaf0;
+    --sg-dark: #212529;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+}
+
+.navbar-brand {
+    background: linear-gradient(90deg, var(--sg-primary), var(--sg-info));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+}
+
+.feature-card {
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04) !important;
+}
+
+.feature-card i {
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover i {
+    transform: scale(1.2);
+}
+
+.product-card {
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(79,70,229,0.25) !important;
+}
+
+.stats-users {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+}
+
+.stats-products {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+}
+
+.stats-active {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+.stats-revenue {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+}
+
+.step-circle {
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s ease;
+}
+
+.step-circle:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.table-dark {
+    background: linear-gradient(90deg, #1e293b 0%, #334155 100%) !important;
+}
+
+.card-header.bg-white {
+    background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%) !important;
+    border-bottom: 2px solid #818cf8;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--sg-primary), var(--sg-primary-dark));
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(90deg, var(--sg-success), #146c43);
+    border: none;
+}
+
+.badge-role-admin {
+    background: linear-gradient(90deg, #f59e0b, #d97706) !important;
+}
+
+.badge-role-user {
+    background: linear-gradient(90deg, var(--sg-info), #2563eb) !important;
+}
+
+footer a {
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+footer a:hover {
+    opacity: 0.8;
+}
